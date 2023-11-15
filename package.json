@@ -1,0 +1,20 @@
+{
+  "name": "screeps-chinese-pack",
+  "version": "1.0.0",
+  "source": "src/main.ts",
+  "main": "dist/screeps-chinese-pack.user.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "parcel --no-source-maps",
+    "build": "rimraf ./.parcel-cache && parcel build --no-source-maps",
+    "watch": "parcel watch --no-source-maps",
+    "buildPlugin": "tsc --project ./plugin/src/tsconfig.json"
+  },
+  "devDependencies": {
+    "@parcel/transformer-typescript-tsc": "^2.10.2",
+    "@types/node": "^20.9.0",
+    "parcel": "^2.10.2",
+    "rimraf": "^5.0.5",
+    "typescript": ">=3.0.0"
+  }
+}
