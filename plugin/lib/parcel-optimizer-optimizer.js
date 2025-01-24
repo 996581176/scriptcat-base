@@ -9,8 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g = Object.create((typeof Iterator === "function" ? Iterator : Object).prototype);
+    return g.next = verb(0), g["throw"] = verb(1), g["return"] = verb(2), typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
@@ -55,24 +55,25 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var plugin_1 = require("@parcel/plugin");
 exports.default = new plugin_1.Optimizer({
     loadConfig: function (_a) {
-        var config = _a.config;
-        return __awaiter(this, void 0, void 0, function () {
+        return __awaiter(this, arguments, void 0, function (_b) {
             var contents;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0: return [4, config.getConfig(["meta.json"])];
+            var config = _b.config;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0: return [4, config.getConfig([process.cwd() + "\\meta.json"])];
                     case 1:
-                        contents = ((_b.sent()) || {}).contents;
+                        contents = ((_c.sent()) ||
+                            {}).contents;
                         return [2, contents];
                 }
             });
         });
     },
     optimize: function (_a) {
-        var contents = _a.contents, map = _a.map, config = _a.config;
-        return __awaiter(this, void 0, void 0, function () {
+        return __awaiter(this, arguments, void 0, function (_b) {
             var strArr_1;
-            return __generator(this, function (_b) {
+            var contents = _b.contents, map = _b.map, config = _b.config;
+            return __generator(this, function (_c) {
                 if (config) {
                     strArr_1 = [];
                     strArr_1.push("// ==UserScript==");

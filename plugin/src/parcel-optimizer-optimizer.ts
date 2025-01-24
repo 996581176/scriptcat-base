@@ -7,7 +7,8 @@ type MyConfig = { [key: string]: string | string[] };
 export default new Optimizer({
   async loadConfig({ config }) {
     let { contents } =
-      (await config.getConfig<MyConfig>(["meta.json"])) || ({} as Partial<ConfigResultWithFilePath<MyConfig>>);
+      (await config.getConfig<MyConfig>([process.cwd() + "\\meta.json"])) ||
+      ({} as Partial<ConfigResultWithFilePath<MyConfig>>);
     return contents;
   },
   async optimize({ contents, map, config }) {
@@ -16,7 +17,7 @@ export default new Optimizer({
       strArr.push("// ==UserScript==");
       Object.entries(config).forEach(([key, value]) => {
         if (Array.isArray(value)) {
-          value.forEach(item => {
+          value.forEach((item) => {
             strArr.push(`// ${key}${generateSpace(14 - key.length)}${item}`);
           });
         } else {

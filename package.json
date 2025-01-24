@@ -5,9 +5,9 @@
   "main": "dist/screeps-chinese-pack.user.js",
   "license": "MIT",
   "scripts": {
-    "start": "parcel --no-source-maps",
-    "build": "rimraf ./.parcel-cache && parcel build --no-source-maps",
-    "watch": "parcel watch --no-source-maps",
+    "start": "parcel --no-source-maps --no-cache",
+    "build": "parcel build --no-source-maps --no-cache --cache-dir ./.parcel-cache",
+    "watch": "parcel watch --no-source-maps --no-cache",
     "buildPlugin": "tsc --project ./plugin/src/tsconfig.json"
   },
   "devDependencies": {
@@ -16,7 +16,9 @@
     "@parcel/transformer-typescript-tsc": "^2.13.3",
     "@parcel/types": "^2.13.3",
     "parcel": "^2.13.3",
-    "rimraf": "^6.0.1",
     "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "@types/node": "^22.10.10"
   }
 }
