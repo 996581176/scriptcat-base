@@ -88,7 +88,14 @@ exports.default = new plugin_1.Optimizer({
                             strArr_1.push("// ".concat(key).concat(generateSpace(14 - key.length)).concat(value));
                         }
                     });
-                    strArr_1.push("// ==/UserScript==\n");
+                    strArr_1.push("// ==/UserScript==\n\n");
+                    if (Object.keys(config).includes("@crontab") ||
+                        Object.keys(config).includes("@background")) {
+                        contents = "return new Promise((resolve, reject) => {\n".concat(contents, "resolve();\n});");
+                    }
+                    else {
+                        contents = "(function () {\n".concat(contents, "})();");
+                    }
                     contents = strArr_1.join("\n") + contents;
                 }
                 return [2, {

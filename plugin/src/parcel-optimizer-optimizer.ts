@@ -24,7 +24,17 @@ export default new Optimizer({
           strArr.push(`// ${key}${generateSpace(14 - key.length)}${value}`);
         }
       });
-      strArr.push("// ==/UserScript==\n");
+      strArr.push("// ==/UserScript==\n\n");
+      if (
+        Object.keys(config).includes("@crontab") ||
+        Object.keys(config).includes("@background")
+      ) {
+        // 后台/定时任务
+        contents = `return new Promise((resolve, reject) => {\n${contents}resolve();\n});`;
+      } else {
+        // 普通脚本
+        contents = `(function () {\n${contents}})();`;
+      }
       contents = strArr.join("\n") + contents;
     }
     return {
