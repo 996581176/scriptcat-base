@@ -76,14 +76,14 @@ export default new Optimizer({
         Object.keys(config).includes("@background")
       ) {
         // 后台/定时任务
-        contents = `return new Promise((resolve, reject) => {\n${userConfigArr.join(
+        contents = `${userConfigArr.join(
           "\n"
-        )}\n${contents}resolve();\n});`;
+        )}\nreturn new Promise((resolve, reject) => {\n${contents}resolve();\n});`;
       } else {
         // 普通脚本
-        contents = `(function () {\n${userConfigArr.join(
+        contents = `${userConfigArr.join(
           "\n"
-        )}\n${contents}})();`;
+        )}\n(function () {\n${contents}})();`;
       }
       contents = strArr.join("\n") + contents;
     }
@@ -111,12 +111,12 @@ function handleUserScript(data: UserConfig) {
     arr.push(`${key}:`);
     Object.entries(value).forEach(([key, value]) => {
       // 配置组中的配置项
-      arr.push(`\t${key}:`);
+      arr.push(`    ${key}:`);
       Object.entries(value).forEach(([key, value]) => {
         if (Array.isArray(value)) {
-          arr.push(`\t\t${key}:[${value.join(",")}]`);
+          arr.push(`        ${key}:[${value.join(",")}]`);
         } else {
-          arr.push(`\t\t${key}:${value}`);
+          arr.push(`        ${key}:${value}`);
         }
       });
     });
