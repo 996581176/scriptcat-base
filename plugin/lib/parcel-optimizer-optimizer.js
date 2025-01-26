@@ -99,10 +99,10 @@ exports.default = new plugin_1.Optimizer({
                     strArr_1.push("// ==/UserScript==\n\n");
                     if (Object.keys(config).includes("@crontab") ||
                         Object.keys(config).includes("@background")) {
-                        contents = "return new Promise((resolve, reject) => {\n".concat(userConfigArr_1.join("\n"), "\n").concat(contents, "resolve();\n});");
+                        contents = "".concat(userConfigArr_1.join("\n"), "\nreturn new Promise((resolve, reject) => {\n").concat(contents, "resolve();\n});");
                     }
                     else {
-                        contents = "(function () {\n".concat(userConfigArr_1.join("\n"), "\n").concat(contents, "})();");
+                        contents = "".concat(userConfigArr_1.join("\n"), "\n(function () {\n").concat(contents, "})();");
                     }
                     contents = strArr_1.join("\n") + contents;
                 }
@@ -128,14 +128,14 @@ function handleUserScript(data) {
         arr.push("".concat(key, ":"));
         Object.entries(value).forEach(function (_a) {
             var _b = __read(_a, 2), key = _b[0], value = _b[1];
-            arr.push("\t".concat(key, ":"));
+            arr.push("    ".concat(key, ":"));
             Object.entries(value).forEach(function (_a) {
                 var _b = __read(_a, 2), key = _b[0], value = _b[1];
                 if (Array.isArray(value)) {
-                    arr.push("\t\t".concat(key, ":[").concat(value.join(","), "]"));
+                    arr.push("        ".concat(key, ": [").concat(value.join(","), "]"));
                 }
                 else {
-                    arr.push("\t\t".concat(key, ":").concat(value));
+                    arr.push("        ".concat(key, ": ").concat(value));
                 }
             });
         });

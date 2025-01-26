@@ -114,9 +114,9 @@ function handleUserScript(data: UserConfig) {
       arr.push(`    ${key}:`);
       Object.entries(value).forEach(([key, value]) => {
         if (Array.isArray(value)) {
-          arr.push(`        ${key}:[${value.join(",")}]`);
+          arr.push(`        ${key}: [${value.join(",")}]`);
         } else {
-          arr.push(`        ${key}:${value}`);
+          arr.push(`        ${key}: ${value}`);
         }
       });
     });
