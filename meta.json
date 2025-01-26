@@ -6,5 +6,72 @@
   "@author": "NorthEgg",
   "@match": "https://screeps.com/*",
   "@grant": "none",
-  "@license": "MIT"
+  "@license": "MIT",
+  "UserConfig": {
+    "group1": {
+      "configA": {
+        "title": "配置A",
+        "description": "这是一个文本类型的配置",
+        "type": "text",
+        "default": "默认值",
+        "min": 2,
+        "max": 18,
+        "password": true
+      },
+      "configB": {
+        "title": "配置B",
+        "description": "这是一个选择框的配置",
+        "type": "checkbox",
+        "default": true
+      },
+      "configC": {
+        "title": "配置C",
+        "description": "这是一个列表选择的配置",
+        "type": "select",
+        "default": 1,
+        "values": [1, 2, 3, 4, 5]
+      },
+      "configD": {
+        "title": "配置D",
+        "description": "这是一个动态列表选择的配置",
+        "type": "select",
+        "bind": "$cookies"
+      },
+      "configE": {
+        "title": "配置E",
+        "description": "这是一个多选列表的配置",
+        "type": "mult-select",
+        "default": [1],
+        "values": [1, 2, 3, 4, 5]
+      },
+      "configF": {
+        "title": "配置F",
+        "description": "这是一个动态多选列表的配置",
+        "type": "mult-select",
+        "bind": "$cookies"
+      },
+      "configG": {
+        "title": "配置G",
+        "description": "这是一个数字的配置",
+        "type": "number",
+        "default": 1,
+        "min": 10,
+        "max": 16,
+        "unit": "分"
+      },
+      "configH": {
+        "title": "配置H",
+        "description": "这是一个长文本类型的配置",
+        "type": "textarea",
+        "default": "默认值"
+      }
+    },
+    "group2": {
+      "configX": {
+        "title": "配置X",
+        "description": "这是一个文本类型的配置",
+        "default": "默认值"
+      }
+    }
+  }
 }

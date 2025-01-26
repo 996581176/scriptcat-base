@@ -71,30 +71,38 @@ exports.default = new plugin_1.Optimizer({
     },
     optimize: function (_a) {
         return __awaiter(this, arguments, void 0, function (_b) {
-            var strArr_1;
+            var strArr_1, userConfigArr_1;
             var contents = _b.contents, map = _b.map, config = _b.config;
             return __generator(this, function (_c) {
                 if (config) {
                     strArr_1 = [];
+                    userConfigArr_1 = [];
                     strArr_1.push("// ==UserScript==");
                     Object.entries(config).forEach(function (_a) {
                         var _b = __read(_a, 2), key = _b[0], value = _b[1];
-                        if (Array.isArray(value)) {
-                            value.forEach(function (item) {
-                                strArr_1.push("// ".concat(key).concat(generateSpace(14 - key.length)).concat(item));
-                            });
+                        if (key === "UserConfig") {
+                            userConfigArr_1 = handleUserScript(value);
+                            userConfigArr_1.unshift("/* ==UserConfig==");
+                            userConfigArr_1.push("==/UserConfig== */");
                         }
                         else {
-                            strArr_1.push("// ".concat(key).concat(generateSpace(14 - key.length)).concat(value));
+                            if (Array.isArray(value)) {
+                                value.forEach(function (item) {
+                                    strArr_1.push("// @".concat(key).concat(generateSpace(14 - key.length)).concat(item));
+                                });
+                            }
+                            else {
+                                strArr_1.push("// @".concat(key).concat(generateSpace(14 - key.length)).concat(value));
+                            }
                         }
                     });
                     strArr_1.push("// ==/UserScript==\n\n");
                     if (Object.keys(config).includes("@crontab") ||
                         Object.keys(config).includes("@background")) {
-                        contents = "return new Promise((resolve, reject) => {\n".concat(contents, "resolve();\n});");
+                        contents = "return new Promise((resolve, reject) => {\n".concat(userConfigArr_1.join("\n"), "\n").concat(contents, "resolve();\n});");
                     }
                     else {
-                        contents = "(function () {\n".concat(contents, "})();");
+                        contents = "(function () {\n".concat(userConfigArr_1.join("\n"), "\n").concat(contents, "})();");
                     }
                     contents = strArr_1.join("\n") + contents;
                 }
@@ -112,4 +120,25 @@ function generateSpace(length) {
         str += " ";
     }
     return str;
+}
+function handleUserScript(data) {
+    var arr = [];
+    Object.entries(data).forEach(function (_a) {
+        var _b = __read(_a, 2), key = _b[0], value = _b[1];
+        arr.push("".concat(key, ":"));
+        Object.entries(value).forEach(function (_a) {
+            var _b = __read(_a, 2), key = _b[0], value = _b[1];
+            arr.push("\t".concat(key, ":"));
+            Object.entries(value).forEach(function (_a) {
+                var _b = __read(_a, 2), key = _b[0], value = _b[1];
+                if (Array.isArray(value)) {
+                    arr.push("\t\t".concat(key, ":[").concat(value.join(","), "]"));
+                }
+                else {
+                    arr.push("\t\t".concat(key, ":").concat(value));
+                }
+            });
+        });
+    });
+    return arr;
 }
