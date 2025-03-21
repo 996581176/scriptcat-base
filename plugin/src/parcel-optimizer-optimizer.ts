@@ -78,7 +78,7 @@ export default new Optimizer({
         // 后台/定时任务
         contents = `${userConfigArr.join(
           "\n"
-        )}\nreturn new Promise((resolve, reject) => {\n${contents}resolve();\n});`;
+        )}\nreturn new Promise(async (resolve, reject) => {\n${contents}resolve();\n});`;
       } else {
         // 普通脚本
         contents = `${userConfigArr.join(

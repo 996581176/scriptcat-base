@@ -99,7 +99,7 @@ exports.default = new plugin_1.Optimizer({
                     strArr_1.push("// ==/UserScript==\n\n");
                     if (Object.keys(config).includes("crontab") ||
                         Object.keys(config).includes("background")) {
-                        contents = "".concat(userConfigArr_1.join("\n"), "\nreturn new Promise((resolve, reject) => {\n").concat(contents, "resolve();\n});");
+                        contents = "".concat(userConfigArr_1.join("\n"), "\nreturn new Promise(async (resolve, reject) => {\n").concat(contents, "resolve();\n});");
                     }
                     else {
                         contents = "".concat(userConfigArr_1.join("\n"), "\n(function () {\n").concat(contents, "})();");
