@@ -72,8 +72,8 @@ export default new Optimizer({
       });
       strArr.push("// ==/UserScript==\n\n");
       if (
-        Object.keys(config).includes("@crontab") ||
-        Object.keys(config).includes("@background")
+        Object.keys(config).includes("crontab") ||
+        Object.keys(config).includes("background")
       ) {
         // 后台/定时任务
         contents = `${userConfigArr.join(
